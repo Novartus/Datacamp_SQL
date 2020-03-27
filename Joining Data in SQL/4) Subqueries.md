@@ -37,8 +37,8 @@ LIMIT 9;
 # Subquery inside from
 ### (1)
 SELECT code, COUNT(name) AS lang_num
-FROM languages
-GROUP BY code;
+  FROM languages
+  GROUP BY code;
 
 ### (2)
 
@@ -55,9 +55,9 @@ ORDER BY lang_num DESC;
 ### (1)
 
 SELECT name, continent, inflation_rate
-FROM countries 
-INNER JOIN economies
-USING (code)
+  FROM countries 
+  INNER JOIN economies
+  USING (code)
 WHERE year = 2015;
 
 ### (2)
