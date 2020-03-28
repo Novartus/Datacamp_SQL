@@ -47,3 +47,16 @@ FROM matches_spain AS m
 LEFT JOIN teams_spain AS t 
 ON m.awayteam_id = t.team_api_id
 WHERE m.hometeam_id = 8634; 
+
+# CASE statements comparing two column values part 2
+SELECT  
+	m.date,
+	t.team_long_name AS opponent,
+	CASE WHEN m.home_goal < m.away_goal THEN 'Barcelona win!'
+         WHEN m.home_goal > m.away_goal THEN 'Barcelona loss :(' 
+         ELSE 'Tie' END AS outcome
+FROM matches_spain AS m
+LEFT JOIN teams_spain AS t 
+ON m.hometeam_id = t.team_api_id
+WHERE m.awayteam_id = 8634;
+
