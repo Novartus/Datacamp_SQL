@@ -88,3 +88,33 @@ SELECT
 FROM matches_spain
 WHERE (awayteam_id = 8634 OR hometeam_id = 8634)
       AND (awayteam_id = 8633 OR hometeam_id = 8633);
+
+# Filtering your CASE statement
+
+### (1)
+SELECT
+	team_long_name,
+	team_api_id
+FROM teams_italy
+WHERE team_long_name = 'Bologna';
+
+### (2)
+SELECT 
+	season,
+	date,
+	CASE WHEN hometeam_id = 9857  AND home_goal > away_goal THEN 'Bologna Win'
+		WHEN awayteam_id = 9857 AND away_goal > home_goal THEN 'Bologna Win' 
+		END AS outcome
+FROM matches_italy;
+
+### (3)
+SELECT 
+	season,
+    date,
+	home_goal,
+	away_goal
+FROM matches_italy
+WHERE 
+	CASE WHEN hometeam_id = 9857 AND home_goal > away_goal THEN 'Bologna Win'
+	     WHEN awayteam_id = 9857 AND away_goal > home_goal THEN 'Bologna Win' 
+		END IS NOT NULL;
