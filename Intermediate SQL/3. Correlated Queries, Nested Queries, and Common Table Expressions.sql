@@ -1,4 +1,4 @@
-# Basic Correlated Subqueries
+-- Basic Correlated Subqueries
 SELECT 
 	main.country_id,
     main.date,
@@ -12,7 +12,7 @@ WHERE
          -- Join the main query to the subquery in WHERE
          WHERE main.country_id = sub.country_id);
 
-# Correlated subquery with multiple conditions
+-- Correlated subquery with multiple conditions
 SELECT 
 	main.country_id,
     main.date,
@@ -26,7 +26,7 @@ WHERE
          WHERE main.country_id = sub.country_id
                AND main.season = sub.season);
 
-# Nested simple subqueries
+-- Nested simple subqueries
 SELECT 
 	-- Select the season and max goals scored in a match
 	season,
@@ -41,9 +41,9 @@ SELECT
 FROM match
 GROUP BY season;
 
-# Nest a subquery in FROM
+-- Nest a subquery in FROM
 
-### (1)
+-- (1)
 SELECT
 	country_id,
     season,
@@ -51,7 +51,7 @@ SELECT
 FROM match
 WHERE home_goal >= 5 OR away_goal >= 5;
 
-### (2)
+-- (2)
 SELECT
     country_id,
     season,
@@ -64,7 +64,7 @@ FROM (  SELECT
 	WHERE home_goal >= 5 OR away_goal >= 5) AS subquery
 GROUP BY country_id, season;
 
-### (3)
+-- (3)
 SELECT
 	c.name AS country,
 	AVG(c.id) AS avg_seasonal_high_scores
@@ -81,7 +81,7 @@ LEFT JOIN (
 ON c.id = outer_s.country_id
 GROUP BY country;
 
-# Clean up with CTEs
+-- Clean up with CTEs
 WITH match_list AS (
     SELECT 
   		country_id, 
@@ -95,7 +95,7 @@ FROM league AS l
 LEFT JOIN match_list ON l.id =  match_list.country_id
 GROUP BY l.name;
 
-# Organizing with CTEs
+-- Organizing with CTEs
 WITH match_list AS 
     (   SELECT 
   		l.name AS league, 
@@ -109,7 +109,7 @@ SELECT league, date, home_goal, away_goal
 FROM match_list
 WHERE total_goals >= 10;
 
-# CTEs with nested subqueries
+-- CTEs with nested subqueries
 WITH match_lis t AS ( SELECT 
             		  country_id, 
             	      (home_goal + away_goal) AS goals
@@ -126,9 +126,9 @@ FROM league AS l
 LEFT JOIN match_list ON l.id = match_list.country_id
 GROUP BY l.name;
 
-# Get team names with a subquery
+-- Get team names with a subquery
 
-### (1)
+-- (1)
 SELECT 
 	m.id, 
     t.team_long_name AS hometeam
@@ -136,7 +136,7 @@ FROM match AS m
 LEFT JOIN team as t
 ON m.hometeam_id = team_api_id;
 
-### (2)
+-- (2)
 SELECT
 	m.date,
     hometeam, 
@@ -159,9 +159,9 @@ LEFT JOIN
   ON match.awayteam_id = team.team_api_id) AS away
 ON away.id = m.id;
 
-# Get team names with correlated subqueries
+-- Get team names with correlated subqueries
 
-### (1)
+-- (1)
 SELECT
     m.date,
    (SELECT team_long_name
@@ -169,7 +169,7 @@ SELECT
     WHERE t.team_api_id = m.hometeam_id) AS hometeam
 FROM match AS m;
 
-### (2)
+-- (2)
 SELECT
     m.date,
    
@@ -187,9 +187,9 @@ SELECT
 
 FROM match AS m;
 
-# Get team names with CTEs 10
+-- Get team names with CTEs 10
 
-### (1)
+-- (1)
 SELECT 
     m.id, 
     t.team_long_name AS hometeam
@@ -197,7 +197,7 @@ FROM match AS m
 LEFT JOIN team AS t 
 ON m.hometeam_id = t.team_api_id; 
 
-### (2)
+-- (2)
 WITH home AS (
 	SELECT m.id, t.team_long_name AS hometeam
 	FROM match AS m
@@ -206,7 +206,7 @@ WITH home AS (
 SELECT *
 FROM home;
 
-### (3)
+-- (3)
 WITH home AS 
 (  SELECT m.id, m.date, 
   		 t.team_long_name AS hometeam, m.home_goal
