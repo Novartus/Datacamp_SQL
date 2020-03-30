@@ -1,4 +1,4 @@
-# Union
+--  Union
 
 SELECT *
   FROM economies2010
@@ -8,7 +8,7 @@ SELECT *
 ORDER BY CODE, YEAR;
 
 
-# Union (2)
+--  Union (2)
 SELECT country_code
   FROM cities
 	UNION
@@ -16,7 +16,7 @@ SELECT code
  FROM currencies
 Order BY country_code;
 
-# Union all
+--  Union all
 
 SELECT code, year
   FROM economies
@@ -25,7 +25,7 @@ SELECT country_code, year
   FROM populations
 ORDER BY code, year;
 
-# Intersect
+--  Intersect
 
 SELECT code, year
   FROM economies
@@ -34,7 +34,7 @@ SELECT country_code, year
   FROM populations
 ORDER BY code, year;
 
-# Intersect (2)
+--  Intersect (2)
 
 SELECT name
   FROM countries
@@ -42,11 +42,11 @@ SELECT name
 SELECT name
   FROM cities;
 
-# Review union and intersect
-Q:- Which of the following combinations of terms and definitions is correct?
-Ans:- INTERSECT: returns only records appearing in both tables
+--  Review union and intersect
+--  Q:- Which of the following combinations of terms and definitions is correct?
+--  Ans:- INTERSECT: returns only records appearing in both tables
 
-# Except
+--  Except
 
 SELECT name
   FROM cities
@@ -55,7 +55,7 @@ SELECT capital
   FROM countries
 ORDER BY name;
 
-# Except (2)
+--  Except (2)
 
 SELECT capital
   FROM countries
@@ -64,7 +64,7 @@ SELECT name
   FROM cities
 ORDER BY capital;
 
-# Semi-join
+--  Semi-join
 1)
 SELECT country.code
   FROM countries AS country
@@ -75,10 +75,10 @@ SELECT DISTINCT lang.name
 FROM languages AS lang
 ORDER BY lang.name;
 
-# Relating semi-join to a tweaked inner join
+--  Relating semi-join to a tweaked inner join
 Ans: DISTNICT
 
-# Diagnosing problems using anti-join
+--  Diagnosing problems using anti-join
 1)
 SELECT COUNT(*)
 FROM countries
@@ -99,7 +99,7 @@ WHERE c1.continent = 'Oceania'
     (SELECT code 
     FROM currencies);
 
-# Set theory challenge
+--  Set theory challenge
 SELECT name
 FROM cities AS c1
 WHERE country_code IN
