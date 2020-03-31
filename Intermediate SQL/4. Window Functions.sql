@@ -1,4 +1,4 @@
-# The match is OVER
+-- The match is OVER
 SELECT 
 	m.id, 
     c.name AS country, 
@@ -9,7 +9,8 @@ SELECT
 FROM match AS m
 LEFT JOIN country AS c ON m.country_id = c.id;
 
-# What's OVER here?
+
+-- What's OVER here?
 SELECT 
 	l.name AS league,
     AVG(m.home_goal + m.away_goal) AS avg_goals,
@@ -21,7 +22,8 @@ WHERE m.season = '2011/2012'
 GROUP BY l.name
 ORDER BY league_rank;
 
-# Flip OVER your results
+
+-- Flip OVER your results
 SELECT 
 	l.name AS league,
     AVG(m.home_goal + m.away_goal) AS avg_goals,
@@ -33,7 +35,8 @@ WHERE m.season = '2011/2012'
 GROUP BY l.name
 ORDER BY league_rank;
 
-# PARTITION BY a column
+
+-- PARTITION BY a column
 SELECT
 	date,
 	season,
@@ -49,7 +52,8 @@ WHERE
     OR awayteam_id = 8673
 ORDER BY (home_goal + away_goal) DESC;
 
-# PARTITION BY multiple columns
+
+-- PARTITION BY multiple columns
 SELECT 
 	date,
 	season,
@@ -67,7 +71,8 @@ WHERE
     OR awayteam_id = 8673
 ORDER BY (home_goal + away_goal) DESC;
 
-# Slide to the left
+
+-- Slide to the left
 SELECT 
 	date,
 	home_goal,
@@ -81,7 +86,8 @@ WHERE
 	hometeam_id = 9908 
 	AND season = '2011/2012';
 
-# Slide to the right
+
+-- Slide to the right
 SELECT 
 	date,
     home_goal,
@@ -95,7 +101,8 @@ WHERE
 	awayteam_id = 9908 
     AND season = '2011/2012';
 
-# Setting up the home team CTE
+
+-- Setting up the home team CTE
 SELECT 
 	m.id, 
     t.team_long_name,
@@ -109,7 +116,8 @@ WHERE
 	m.season = '2014/2015'
 	AND t.team_long_name = 'Manchester United';
 
-# Setting up the away team CTE
+
+-- Setting up the away team CTE
 SELECT 
 	m.id, 
     t.team_long_name,
@@ -123,7 +131,8 @@ WHERE
 	m.season = '2014/2015'
 	AND t.team_long_name = 'Manchester United';
 
-# Putting the CTEs together
+
+-- Putting the CTEs together
 WITH home AS (
   SELECT m.id, t.team_long_name,
 	  CASE WHEN m.home_goal > m.away_goal THEN 'MU Win'
@@ -151,7 +160,8 @@ WHERE m.season = '2014/2015'
       AND (home.team_long_name = 'Manchester United' 
            OR away.team_long_name = 'Manchester United');
 
-# Add a window function
+
+-- Add a window function
 WITH home AS (
   SELECT m.id, t.team_long_name,
 	  CASE WHEN m.home_goal > m.away_goal THEN 'MU Win'
