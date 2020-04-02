@@ -119,3 +119,21 @@ SELECT
             ORDER BY Year ASC) AS Last_Champion
 FROM Athletics_Gold
 ORDER BY Event ASC, Gender ASC, Year ASC;
+
+
+/*
+# Row numbers with partitioning
+
+If you run ROW_NUMBER() OVER (PARTITION BY Year ORDER BY Medals DESC) on the following table, what row number would the 2008 Iranian record have?
+
+| Year | Country | Medals |
+|------|---------|--------|
+| 2004 | IRN     | 32     |
+| 2004 | LBN     | 17     |
+| 2004 | KSA     | 4      |
+| 2008 | IRQ     | 29     |
+| 2008 | IRN     | 27     |
+| 2008 | UAE     | 12     |
+
+### Ans: 2
+*/
