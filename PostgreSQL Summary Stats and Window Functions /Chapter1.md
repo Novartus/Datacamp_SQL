@@ -51,3 +51,35 @@ SELECT
   ROW_NUMBER() OVER (ORDER BY Medals DESC) AS Row_N
 FROM Athlete_Medals
 ORDER BY Medals DESC;
+
+# Reigning weightlifting champions
+### (1)
+SELECT
+  Year,
+  Country AS champion
+FROM Summer_Medals
+WHERE
+  Discipline = 'Weightlifting' AND
+  Event = '69KG' AND
+  Gender = 'Men' AND
+  Medal = 'Gold';
+
+### (2)
+WITH Weightlifting_Gold AS (
+  SELECT
+    -- Return each year's champions' countries
+    Year,
+    Country AS champion
+  FROM Summer_Medals
+  WHERE
+    Discipline = 'Weightlifting' AND
+    Event = '69KG' AND
+    Gender = 'Men' AND
+    Medal = 'Gold')
+
+SELECT
+  Year, Champion,
+  LAG(Champion) OVER
+    (ORDER BY Weightlifting_Gold ASC) AS Last_Champion
+FROM Weightlifting_Gold
+ORDER BY Year ASC;
