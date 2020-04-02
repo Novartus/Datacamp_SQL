@@ -1,14 +1,14 @@
-#  Which of the following is FALSE?
-### Ans:Window functions can open a "window" to another table, whereas GROUP BY functions cannot.
+--  Which of the following is FALSE?
+-- Ans:Window functions can open a "window" to another table, whereas GROUP BY functions cannot.
 
-# Numbering rows
+-- Numbering rows
 SELECT
   *,
   ROW_NUMBER() OVER() AS Row_N
 FROM Summer_Medals
 ORDER BY Row_N ASC;
 
-# Numbering Olympic games in ascending order
+-- Numbering Olympic games in ascending order
 SELECT
   Year,
   ROW_NUMBER() OVER() AS Row_N
@@ -19,7 +19,7 @@ FROM (
 ) AS Years
 ORDER BY Year ASC;
 
-# Numbering Olympic games in descending order
+-- Numbering Olympic games in descending order
 SELECT
   Year,
   ROW_NUMBER() OVER (ORDER BY Year DESC) AS Row_N
@@ -29,8 +29,8 @@ FROM (
 ) AS Years
 ORDER BY Year;
 
-# Numbering Olympic athletes by medals earned
-### (1)
+-- Numbering Olympic athletes by medals earned
+-- (1)
 SELECT
   athlete,
   COUNT(sport) AS Medals
@@ -38,7 +38,7 @@ FROM Summer_Medals
 GROUP BY Athlete
 ORDER BY Medals DESC;
 
-### (2)
+-- (2)
 WITH Athlete_Medals AS (
   SELECT
     Athlete,
@@ -52,8 +52,8 @@ SELECT
 FROM Athlete_Medals
 ORDER BY Medals DESC;
 
-# Reigning weightlifting champions
-### (1)
+-- Reigning weightlifting champions
+-- (1)
 SELECT
   Year,
   Country AS champion
@@ -64,7 +64,7 @@ WHERE
   Gender = 'Men' AND
   Medal = 'Gold';
 
-### (2)
+-- (2)
 WITH Weightlifting_Gold AS (
   SELECT
     Year,
@@ -83,7 +83,7 @@ SELECT
 FROM Weightlifting_Gold
 ORDER BY Year ASC;
 
-# Reigning champions by gender
+-- Reigning champions by gender
 WITH Tennis_Gold AS (
   SELECT DISTINCT
     Gender, Year, Country
@@ -101,7 +101,7 @@ SELECT
 FROM Tennis_Gold
 ORDER BY Gender ASC, Year ASC;
 
-# Reigning champions by gender and event
+-- Reigning champions by gender and event
 WITH Athletics_Gold AS (
   SELECT DISTINCT
     Gender, Year, Event, Country
@@ -122,7 +122,7 @@ ORDER BY Event ASC, Gender ASC, Year ASC;
 
 
 /*
-# Row numbers with partitioning
+-- Row numbers with partitioning
 
 If you run ROW_NUMBER() OVER (PARTITION BY Year ORDER BY Medals DESC) on the following table, what row number would the 2008 Iranian record have?
 
@@ -135,5 +135,5 @@ If you run ROW_NUMBER() OVER (PARTITION BY Year ORDER BY Medals DESC) on the fol
 | 2008 | IRN     | 27     |
 | 2008 | UAE     | 12     |
 
-### Ans: 2
+-- Ans: 2
 */
