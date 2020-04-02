@@ -28,3 +28,26 @@ FROM (
   FROM Summer_Medals
 ) AS Years
 ORDER BY Year;
+
+# Numbering Olympic athletes by medals earned
+### (1)
+SELECT
+  athlete,
+  COUNT(sport) AS Medals
+FROM Summer_Medals
+GROUP BY Athlete
+ORDER BY Medals DESC;
+
+### (2)
+WITH Athlete_Medals AS (
+  SELECT
+    Athlete,
+    COUNT(*) AS Medals
+  FROM Summer_Medals
+  GROUP BY Athlete)
+
+SELECT
+  Athlete,
+  ROW_NUMBER() OVER (ORDER BY Medals DESC) AS Row_N
+FROM Athlete_Medals
+ORDER BY Medals DESC;
