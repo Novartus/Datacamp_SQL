@@ -1,4 +1,4 @@
-# Future gold medalists
+-- Future gold medalists
 WITH Discus_Medalists AS (
   SELECT DISTINCT
     Year,
@@ -16,7 +16,7 @@ SELECT
 FROM Discus_Medalists
 ORDER BY Year ASC;
 
-# First athlete by name
+-- First athlete by name
 WITH All_Male_Medalists AS (
   SELECT DISTINCT
     Athlete
@@ -31,7 +31,7 @@ SELECT
   ) AS First_Athlete
 FROM All_Male_Medalists;
 
-# Last country by name
+-- Last country by name
 WITH Hosts AS (
   SELECT DISTINCT Year, City
     FROM Summer_Medals)
@@ -48,7 +48,7 @@ SELECT
 FROM Hosts
 ORDER BY Year ASC;
 
-# Ranking athletes by medals earned
+-- Ranking athletes by medals earned
 WITH Athlete_Medals AS (
   SELECT
     Athlete,
@@ -63,7 +63,7 @@ SELECT
 FROM Athlete_Medals
 ORDER BY Medals DESC;
 
-# Ranking athletes from multiple countries
+-- Ranking athletes from multiple countries
 WITH Athlete_Medals AS (
   SELECT
     Country, Athlete, COUNT(*) AS Medals
@@ -101,7 +101,7 @@ If you were to use DENSE_RANK to order the Medals column in descending order, wh
 ANS: 3
 */
 
-# Paging events
+-- Paging events
 WITH Events AS (
   SELECT DISTINCT Event
   FROM Summer_Medals)
@@ -112,8 +112,8 @@ SELECT
 FROM Events
 ORDER BY Event ASC;
 
-# Top, middle, and bottom thirds
-### (1)
+-- Top, middle, and bottom thirds
+-- (1)
 WITH Athlete_Medals AS (
   SELECT Athlete, COUNT(*) AS Medals
   FROM Summer_Medals
@@ -127,7 +127,7 @@ SELECT
 FROM Athlete_Medals
 ORDER BY Medals DESC, Athlete ASC;
 
-### (2)
+-- (2)
 WITH Athlete_Medals AS (
   SELECT Athlete, COUNT(*) AS Medals
   FROM Summer_Medals
