@@ -1,4 +1,4 @@
-# Running totals of athlete medals
+-- Running totals of athlete medals
 WITH Athlete_Medals AS (
   SELECT
     Athlete, COUNT(*) AS Medals
@@ -15,7 +15,7 @@ SELECT
 FROM Athlete_Medals
 ORDER BY Athlete ASC;
 
-# Maximum country medals by year
+-- Maximum country medals by year
 
 WITH Country_Medals AS (
   SELECT
@@ -34,7 +34,7 @@ SELECT
 FROM Country_Medals
 ORDER BY Country ASC, Year ASC;
 
-# Minimum country medals by year
+-- Minimum country medals by year
 WITH France_Medals AS (
   SELECT
     Year, COUNT(*) AS Medals
@@ -52,13 +52,13 @@ FROM France_Medals
 ORDER BY Year ASC;
 
 /*
-# Number of rows in a frame
+-- Number of rows in a frame
 Q: How many rows does the following frame span?
    ROWS BETWEEN 3 PRECEDING AND 2 FOLLOWING
 A: 6
 */
 
-# Moving maximum of Scandinavian athletes' medals
+-- Moving maximum of Scandinavian athletes' medals
 WITH Scandinavian_Medals AS (
   SELECT
     Year, COUNT(*) AS Medals
@@ -75,7 +75,7 @@ SELECT
 FROM Scandinavian_Medals
 ORDER BY Year ASC;
 
-# Moving maximum of Chinese athletes' medals
+-- Moving maximum of Chinese athletes' medals
 WITH Chinese_Medals AS (
   SELECT
     Athlete, COUNT(*) AS Medals
@@ -93,12 +93,12 @@ FROM Chinese_Medals
 ORDER BY Athlete ASC;
 
 /*
-# Moving average's frame
+-- Moving average's frame
 Q: If you want your moving average to cover the last 3 and current Olympic games, how would you define its frame?
 A: ROWS BETWEEN 3 PRECEDING AND CURRENT ROW
 */
 
-# Moving average of Russian medals
+-- Moving average of Russian medals
 WITH Russian_Medals AS (
   SELECT
     Year, COUNT(*) AS Medals
@@ -116,7 +116,7 @@ SELECT
 FROM Russian_Medals
 ORDER BY Year ASC;
 
-# Moving total of countries' medals
+-- Moving total of countries' medals
 WITH Country_Medals AS (
   SELECT
     Year, Country, COUNT(*) AS Medals
