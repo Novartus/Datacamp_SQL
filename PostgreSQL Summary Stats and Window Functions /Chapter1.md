@@ -115,7 +115,7 @@ WITH Athletics_Gold AS (
 SELECT
   Gender, Year, Event,
   Country AS Champion,
-  LAG(Year) OVER (PARTITION BY Gender, Event
+  LAG(Country) OVER (PARTITION BY Gender, Event
             ORDER BY Year ASC) AS Last_Champion
 FROM Athletics_Gold
 ORDER BY Event ASC, Gender ASC, Year ASC;
