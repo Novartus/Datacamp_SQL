@@ -18,3 +18,13 @@ FROM (
   ORDER BY Year ASC
 ) AS Years
 ORDER BY Year ASC;
+
+# Numbering Olympic games in descending order
+SELECT
+  Year,
+  ROW_NUMBER() OVER (ORDER BY Year DESC) AS Row_N
+FROM (
+  SELECT DISTINCT Year
+  FROM Summer_Medals
+) AS Years
+ORDER BY Year;
