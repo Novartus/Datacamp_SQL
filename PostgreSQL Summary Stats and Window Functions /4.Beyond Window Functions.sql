@@ -1,4 +1,4 @@
-# A basic pivot
+-- A basic pivot
 CREATE EXTENSION IF NOT EXISTS tablefunc;
 
 SELECT * FROM CROSSTAB($$
@@ -16,8 +16,8 @@ $$) AS ct (Gender VARCHAR,
 
 ORDER BY Gender ASC;
 
-# Pivoting with ranking
-### (1)
+-- Pivoting with ranking
+-- (1)
 SELECT
   Country,
   Year,
@@ -30,7 +30,7 @@ WHERE
 GROUP BY Country, Year
 ORDER BY Country ASC, Year ASC
 
-### (2)
+-- (2)
 WITH Country_Awards AS (
   SELECT
     Country,
@@ -50,7 +50,7 @@ SELECT
 FROM Country_Awards
 ORDER BY Country ASC, Year ASC;
 
-### (3)
+-- (3)
 CREATE EXTENSION IF NOT EXISTS tablefunc;
 
 SELECT * FROM CROSSTAB($$
@@ -81,7 +81,7 @@ $$) AS ct (Country VARCHAR,
 
 Order by Country ASC;
 
-# Country-level subtotals
+-- Country-level subtotals
 SELECT
   Country,
   Gender,
@@ -94,7 +94,7 @@ WHERE
 GROUP BY Country, ROLLUP(Gender)
 ORDER BY Country ASC, Gender ASC;
 
-# All group-level subtotals
+-- All group-level subtotals
 SELECT
   Gender,
   Medal,
@@ -106,7 +106,7 @@ WHERE
 GROUP BY CUBE(Gender, Medal)
 ORDER BY Gender ASC, Medal ASC;
 
-# Cleaning up results
+-- Cleaning up results
 SELECT
   COALESCE(Country, 'All countries') AS Country,
   COALESCE(Gender, 'All genders') AS Gender,
@@ -119,8 +119,8 @@ WHERE
 GROUP BY ROLLUP(Country, Gender)
 ORDER BY Country ASC, Gender ASC;
 
-# Summarizing results
-### (1)
+-- Summarizing results
+-- (1)
 WITH Country_Medals AS (
   SELECT
     Country,
@@ -136,7 +136,7 @@ WITH Country_Medals AS (
   FROM Country_Medals
   ORDER BY Rank ASC;
 
-  ### (2)
+  -- (2)
   WITH Country_Medals AS (
   SELECT
     Country,
