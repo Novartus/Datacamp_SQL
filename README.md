@@ -9,3 +9,4 @@ It contains the SQL solution of the following tracks with DataSet.
 - Joining Data In SQL
 - Intermediate SQL
 - PostgreSQL Summary Stats and Window Functions 
+- Functions for Manipulating Data in PostgreSQL
