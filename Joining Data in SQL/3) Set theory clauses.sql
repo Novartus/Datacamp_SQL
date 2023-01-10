@@ -1,7 +1,7 @@
 --  Union
 
 SELECT *
-  FROM economies2010
+  FROM economies2019
 	UNION
 SELECT *
   FROM economies2015
@@ -25,14 +25,14 @@ SELECT country_code, year
   FROM populations
 ORDER BY code, year;
 
---  Intersect
+-- --  Intersect
 
-SELECT code, year
-  FROM economies
-	INTERSECT
-SELECT country_code, year
-  FROM populations
-ORDER BY code, year;
+-- SELECT code, year
+--   FROM economies
+-- 	INTERSECT
+-- SELECT country_code, year
+--   FROM populations
+-- ORDER BY code, year;
 
 --  Intersect (2)
 
@@ -51,7 +51,7 @@ SELECT name
 SELECT name
   FROM cities
 	EXCEPT
-SELECT capital
+SELECT name
   FROM countries
 ORDER BY name;
 
@@ -66,30 +66,40 @@ ORDER BY capital;
 
 --  Semi-join
 1)
-SELECT country.code
-  FROM countries AS country
-WHERE country.region = 'Middle East';
+SELECT code
+  FROM countries
+WHERE region = 'Middle East';
 
 2)
-SELECT DISTINCT lang.name
-FROM languages AS lang
-ORDER BY lang.name;
+SELECT DISTINCT name
+FROM languages
+ORDER BY name;
+
+3) 
+SELECT DISTINCT name
+FROM languages
+-- Add syntax to use bracketed subquery below as a filter
+where code in 
+    (SELECT code
+    FROM countries
+    WHERE region = 'Middle East')
+ORDER BY name;
 
 --  Relating semi-join to a tweaked inner join
 Ans: DISTNICT
 
 --  Diagnosing problems using anti-join
 1)
-SELECT COUNT(*)
+SELECT code, name
 FROM countries
 WHERE continent = 'Oceania';
 
-2)
-SELECT c1.code, c1.name, c2.basic_unit AS currency
-FROM countries AS c1
-INNER JOIN currencies AS c2
-USING (code)
-WHERE continent = 'Oceania';
+-- 2)
+-- SELECT c1.code, c1.name, c2.basic_unit AS currency
+-- FROM countries AS c1
+-- INNER JOIN currencies AS c2
+-- USING (code)
+-- WHERE continent = 'Oceania';
 
 3)
 SELECT c1.code, c1.name
